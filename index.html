@@ -8,6 +8,7 @@
 </head>
 <body>
   <header class="site-header">
+    <button onclick="toggleSettings()" class="settings-btn">⚙️</button>
     <div class="container">
       <h1>Guinée Divertisity</h1>
       <p class="subtitle">Réseau social communautaire — par Ibrahima Bah</p>
@@ -56,6 +57,28 @@
 
     <section id="feed" class="posts"></section>
   </main>
+
+  <div id="settings-panel" class="settings-panel">
+    <h2>Paramètres 🛠️</h2>
+    
+    <div class="settings-group">
+      <label>Mode Sombre :</label>
+      <input type="checkbox" id="theme-switch" onchange="changerTheme()" checked>
+    </div>
+    
+    <div class="settings-group">
+      <label>Changer mon nom :</label>
+      <input type="text" id="new-username" placeholder="Nouveau nom d'utilisateur">
+      <button onclick="sauvegarderNom()" class="settings-btn-update">Mettre à jour</button>
+    </div>
+    
+    <div class="settings-group">
+      <label>Notifications de la communauté :</label>
+      <input type="checkbox" checked>
+    </div>
+
+    <button onclick="toggleSettings()" class="settings-btn-close">Fermer</button>
+  </div>
 
   <footer class="site-footer">
     © 2026 Guinée Divertisity — Pour tous les Guinéens • Créé par Ibrahima Bah

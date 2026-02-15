@@ -99,6 +99,41 @@ function publierMessage() {
 
 window.publierMessage = publierMessage;
 
+// --- Settings Panel ---
+function toggleSettings() {
+    const panel = document.getElementById('settings-panel');
+    if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        // Charger le nom actuel dans la case
+        document.getElementById('new-username').value = localStorage.getItem('user_nom') || "";
+    } else {
+        panel.style.display = 'none';
+    }
+}
+
+function changerTheme() {
+    const isDark = document.getElementById('theme-switch').checked;
+    if (isDark) {
+        document.body.style.background = "#1a1a1a";
+        document.body.style.color = "white";
+    } else {
+        document.body.style.background = "#f0f0f0";
+        document.body.style.color = "#1a1a1a";
+    }
+}
+
+function sauvegarderNom() {
+    const nouveauNom = document.getElementById('new-username').value;
+    if (nouveauNom.trim() !== "") {
+        localStorage.setItem('user_nom', nouveauNom);
+        alert("Nom mis à jour : " + nouveauNom);
+    }
+}
+
+window.toggleSettings = toggleSettings;
+window.changerTheme = changerTheme;
+window.sauvegarderNom = sauvegarderNom;
+
 function renderPosts() {
   const feed = document.getElementById('feed');
   feed.innerHTML = '';
