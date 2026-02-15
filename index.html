@@ -3,49 +3,33 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guinée Divertisity</title>
+  <title>Guinée Divertisity - Réseau Social</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container">
       <h1>Guinée Divertisity</h1>
-      <p class="subtitle">Application de divertissement — créé par Ibrahima Bah</p>
+      <p class="subtitle">Réseau social communautaire — par Ibrahima Bah</p>
     </div>
   </header>
 
   <main class="container">
-    <section id="about">
-      <h2>À propos</h2>
-      <p>Guinée Divertisity propose des petites animations, blagues, quiz et sons pour se divertir. Auteur / Contact : <strong>Ibrahima Bah</strong>.</p>
+    <section class="hero">
+      <h2 style="margin-top:0;margin-bottom:6px;font-size:16px;color:var(--yellow)">✨ Bienvenue sur Guinée Divertisity!</h2>
+      <p style="margin:0;font-size:13px;color:#bbb">Partagez vos moments, divertissez-vous et connectez-vous avec la communauté guinéenne.</p>
     </section>
 
-    <section id="entertainment">
-      <h2>Divertissements</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Blagues</h3>
-          <p id="joke">Cliquez sur "Nouvelle blague" pour en obtenir une.</p>
-          <button id="jokeBtn">Nouvelle blague</button>
-        </div>
-
-        <div class="card">
-          <h3>Quiz rapide</h3>
-          <p id="quizQ">Prêt pour une question rapide ?</p>
-          <button id="quizBtn">Lancer quiz</button>
-        </div>
-
-        <div class="card">
-          <h3>Son</h3>
-          <p>Jouez un petit son créé par le navigateur.</p>
-          <button id="playBtn">Jouer un son</button>
-        </div>
-      </div>
+    <section class="post-form">
+      <input type="text" id="postInput" placeholder="Partager quelque chose de divertissant..." />
+      <button id="postBtn">Publier</button>
     </section>
+
+    <section id="feed" class="posts"></section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">© 2026 Guinée Divertisity — Ibrahima Bah</div>
+    © 2026 Guinée Divertisity — Pour tous les Guinéens • Créé par Ibrahima Bah
   </footer>
 
   <script src="app.js"></script>

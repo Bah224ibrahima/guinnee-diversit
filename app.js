@@ -1,51 +1,71 @@
-const jokes = [
-  "Pourquoi le livre est-il allé chez le médecin ? Parce qu'il avait la page qui tournait.",
-  "Quel animal est toujours heureux ? Le hibou, parce qu'il fait 'hou hou' de joie !",
-  "Pourquoi les squelettes ne se battent jamais entre eux ? Ils n'ont pas le cran.",
-  "Que dit une tasse à une autre tasse ? On se retrouve au petit-déj !"
+const users = ['Ibrahima', 'Amara', 'Fatou', 'Mamoudou', 'Khadija', 'Sékou', 'Aissatou', 'Koré'];
+const colors = ['#CE1126', '#007A5E', '#FCD116', '#CE1126', '#007A5E', '#FCD116', '#E74C3C', '#1a5f7a'];
+let posts = [
+  {id:1, user:'Ibrahima Bah', avatar:'I', color:'#CE1126', text:'Bienvenue sur Guinée Divertisity! Divertissez-vous avec la communauté 🇬🇳 🎉', time:'2h', likes:42, liked:false},
+  {id:2, user:'Amara Diallo', avatar:'A', color:'#007A5E', text:'J\'aime cette plateforme! À bientôt pour plus de contenu guinéen! ✨', time:'1h', likes:28, liked:false}
 ];
 
-function random(arr){return arr[Math.floor(Math.random()*arr.length)]}
+function getRandomUser() { return {name:users[Math.floor(Math.random()*users.length)], color:colors[Math.floor(Math.random()*colors.length)]}; }
+function formatTime() { const h = Math.floor(Math.random()*48)+1; return h+'h'; }
+
+function renderPosts() {
+  const feed = document.getElementById('feed');
+  feed.innerHTML = '';
+  posts.forEach(post => {
+    const postEl = document.createElement('div');
+    postEl.className = 'card';
+    postEl.innerHTML = `
+      <div class="card-header">
+        <div class="avatar" style="background:${post.color}">${post.avatar}</div>
+        <div>
+          <h3>${post.user}</h3>
+          <div class="card-meta">${post.time}</div>
+        </div>
+      </div>
+      <p>${post.text}</p>
+      <div class="card-actions">
+        <button class="like-btn ${post.liked?'liked':''} like-${post.id}" onclick="toggleLike(${post.id})">❤️ ${post.likes}</button>
+        <button onclick="alert('💬 Les commentaires seront disponibles très bientôt!')">💬 Commenter</button>
+        <button onclick="alert('🔄 Partagez avec vos amis bientôt!')">🔄 Partager</button>
+      </div>
+    `;
+    feed.appendChild(postEl);
+  });
+}
+
+function toggleLike(id) {
+  const post = posts.find(p => p.id === id);
+  if(post) {
+    post.liked = !post.liked;
+    post.likes += post.liked ? 1 : -1;
+    renderPosts();
+  }
+}
+
+function addPost(text) {
+  if(!text.trim()) return alert('Veuillez écrire quelque chose à partager avec la communauté!');
+  const user = getRandomUser();
+  const newPost = {
+    id:posts.length + 1,
+    user:user.name,
+    avatar:user.name[0],
+    color:user.color,
+    text:text,
+    time:'À l\'instant',
+    likes:0,
+    liked:false
+  };
+  posts.unshift(newPost);
+  document.getElementById('postInput').value = '';
+  renderPosts();
+}
 
 document.addEventListener('DOMContentLoaded',()=>{
-  const jokeEl = document.getElementById('joke');
-  const jokeBtn = document.getElementById('jokeBtn');
-  const quizBtn = document.getElementById('quizBtn');
-  const quizQ = document.getElementById('quizQ');
-  const playBtn = document.getElementById('playBtn');
-
-  jokeBtn.addEventListener('click',()=>{ jokeEl.textContent = random(jokes); });
-
-  quizBtn.addEventListener('click',()=>{
-    const q = {question:'Quelle est la capitale de la Guinée ?', choices:['Conakry','Bamako','Dakar'], answer:0};
-    const reply = prompt(q.question + '\n1) ' + q.choices[0] + '\n2) ' + q.choices[1] + '\n3) ' + q.choices[2] + '\n(Entrez 1, 2 ou 3)');
-    const idx = parseInt(reply,10)-1;
-    if(!isNaN(idx) && idx>=0 && idx<q.choices.length){
-      quizQ.textContent = (idx===q.answer) ? 'Bonne réponse ! 🎉' : 'Raté — la bonne réponse est ' + q.choices[q.answer] + '.';
-    } else {
-      quizQ.textContent = 'Réponse non valide.';
-    }
+  renderPosts();
+  document.getElementById('postBtn').addEventListener('click',()=>{
+    addPost(document.getElementById('postInput').value);
   });
-
-  playBtn.addEventListener('click',()=>{
-    // petit son via WebAudio
-    try{
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = 'sine';
-      o.frequency.value = 440; // La4
-      o.connect(g); g.connect(ctx.destination);
-      g.gain.setValueAtTime(0.0001, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.25, ctx.currentTime + 0.01);
-      o.start();
-      // petite mélodie
-      const now = ctx.currentTime;
-      o.frequency.setValueAtTime(440, now);
-      o.frequency.linearRampToValueAtTime(523.25, now + 0.18);
-      o.frequency.linearRampToValueAtTime(659.25, now + 0.36);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
-      setTimeout(()=>{ o.stop(); ctx.close(); },800);
-    }catch(e){ alert('Impossible de jouer le son : ' + e.message); }
+  document.getElementById('postInput').addEventListener('keypress',(e)=>{
+    if(e.key==='Enter') addPost(e.target.value);
   });
 });
