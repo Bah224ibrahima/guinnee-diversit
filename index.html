@@ -20,10 +20,30 @@
       <p style="margin:0;font-size:13px;color:#bbb">Partagez vos moments, divertissez-vous et connectez-vous avec la communauté guinéenne.</p>
     </section>
 
-    <section class="post-form">
-      <input type="text" id="postInput" placeholder="Partager quelque chose de divertissant..." />
-      <button id="postBtn">Publier</button>
-    </section>
+        <!-- Authentication area -->
+        <section id="authArea" style="margin-bottom:12px;display:flex;gap:8px;align-items:center;justify-content:space-between;">
+            <div id="userInfo" style="display:flex;gap:8px;align-items:center">
+                <div id="avatarSmall" style="width:36px;height:36px;border-radius:50%;background:#333;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;display:none"></div>
+                <div id="welcomeText" style="font-size:13px;color:#ddd">Vous n'êtes pas connecté</div>
+            </div>
+            <div id="authButtons" style="display:flex;gap:8px">
+                <button id="googleSignIn">Se connecter avec Google</button>
+                <button id="showEmailForm">Connexion / Inscription</button>
+                <button id="signOutBtn" style="display:none">Se déconnecter</button>
+            </div>
+        </section>
+
+        <section id="emailAuth" style="display:none;margin-bottom:12px;gap:8px">
+            <input id="emailInput" type="email" placeholder="Email" style="padding:8px;border-radius:8px;border:1px solid #333;background:#111;color:#fff" />
+            <input id="passInput" type="password" placeholder="Mot de passe" style="padding:8px;border-radius:8px;border:1px solid #333;background:#111;color:#fff" />
+            <button id="emailRegister">S'inscrire</button>
+            <button id="emailLogin">Se connecter</button>
+        </section>
+
+        <section class="post-form" id="postSection">
+            <input type="text" id="postInput" placeholder="Partager quelque chose de divertissant..." />
+            <button id="postBtn">Publier</button>
+        </section>
 
     <section id="feed" class="posts"></section>
   </main>
@@ -32,7 +52,9 @@
     © 2026 Guinée Divertisity — Pour tous les Guinéens • Créé par Ibrahima Bah
   </footer>
 
-  <script src="app.js"></script>
+  <!-- Firebase SDK -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
 <!DOCTYPE html>
