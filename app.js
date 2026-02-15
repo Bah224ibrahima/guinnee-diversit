@@ -71,6 +71,34 @@ function creerCompte() {
 
 window.creerCompte = creerCompte;
 
+// --- Create and publish post ---
+function publierMessage() {
+    const texte = document.getElementById('post-text').value;
+    const nomUtilisateur = localStorage.getItem('user_nom') || "Anonyme";
+    const feed = document.getElementById('feed');
+
+    if(texte.trim() === "") {
+        alert("Le message est vide !");
+        return;
+    }
+
+    const nouveauPost = document.createElement('div');
+    nouveauPost.className = 'post-item';
+    
+    const date = new Date().toLocaleDateString('fr-FR');
+
+    nouveauPost.innerHTML = `
+        <strong style="color: #ce1126;">${nomUtilisateur}</strong> 
+        <small style="color: #666; float: right;">${date}</small>
+        <p style="margin: 10px 0 0 0;">${texte}</p>
+    `;
+
+    feed.prepend(nouveauPost);
+    document.getElementById('post-text').value = "";
+}
+
+window.publierMessage = publierMessage;
+
 function renderPosts() {
   const feed = document.getElementById('feed');
   feed.innerHTML = '';

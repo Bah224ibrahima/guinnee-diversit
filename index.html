@@ -48,10 +48,11 @@
             <p id="auth-message" class="auth-message"></p>
         </div>
 
-        <section class="post-form" id="postSection">
-            <input type="text" id="postInput" placeholder="Partager quelque chose de divertissant..." />
-            <button id="postBtn">Publier</button>
-        </section>
+        <div id="create-post" class="create-post">
+            <h4>Quoi de neuf en Guinée ? 🇬🇳</h4>
+            <textarea id="post-text" placeholder="Partagez quelque chose..."></textarea>
+            <button onclick="publierMessage()">Publier</button>
+        </div>
 
     <section id="feed" class="posts"></section>
   </main>
