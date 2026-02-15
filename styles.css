@@ -1,6 +1,6 @@
 :root{
   --bg:#0d0d0d;
-  --card:#1a1a1a;
+  --card:#151618;
   --red:#CE1126;
   --yellow:#FCD116;
   --green:#007A5E;
@@ -8,39 +8,42 @@
   --accent:#FCD116;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Segoe UI, Roboto, Arial, sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.container{max-width:600px;margin:0 auto;padding:12px}
-.site-header{background:linear-gradient(90deg,#CE1126,#007A5E);padding:14px 0;border-bottom:4px solid var(--yellow);position:sticky;top:0;z-index:10}
-.site-header h1{margin:0;font-size:22px;color:var(--yellow);text-shadow:0 2px 4px rgba(0,0,0,0.5)}
+body{margin:0;font-family:Segoe UI, Roboto, Arial, sans-serif;background:linear-gradient(180deg,#070707,var(--bg));color:var(--text);min-height:100vh}
+.container{max-width:780px;margin:20px auto;padding:18px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px)}
+.site-header{background:linear-gradient(90deg,var(--red),var(--green));padding:18px;border-radius:10px;position:sticky;top:12px;z-index:20;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+.site-header h1{margin:0;font-size:22px;color:var(--yellow);text-shadow:0 2px 6px rgba(0,0,0,0.6)}
 .site-header::after{content:'🇬🇳';margin-left:8px;font-size:18px}
-.subtitle{margin:4px 0 0;color:#FFE680;font-size:12px;font-style:italic}
-main{padding:12px 0}
-.hero{background:linear-gradient(135deg,rgba(206,17,38,0.15),rgba(0,122,94,0.15));padding:12px;border-radius:8px;margin-bottom:12px;border-left:4px solid var(--yellow);border-top:2px solid var(--red)}
-.post-form{display:flex;gap:8px;margin-bottom:12px}
-.post-form input{flex:1;padding:8px 10px;border:1px solid #333;border-radius:20px;background:#222;color:var(--text);font-size:13px}
-.posts{display:flex;flex-direction:column;gap:10px}
-.card{background:var(--card);padding:12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.08)}
-.card-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.subtitle{margin:6px 0 0;color:#FFE680;font-size:13px;font-style:italic}
+main{padding:16px 0}
+.hero{background:linear-gradient(135deg,rgba(206,17,38,0.06),rgba(0,122,94,0.06));padding:14px;border-radius:12px;margin-bottom:14px;border-left:4px solid var(--yellow)}
+.post-form{display:flex;gap:10px;margin-bottom:14px}
+.post-form input{flex:1;padding:10px 14px;border-radius:24px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg,#0f0f0f,#141414);color:var(--text);font-size:14px;outline:none;box-shadow:0 6px 18px rgba(0,0,0,0.6) inset}
+.post-form input:focus{box-shadow:0 0 0 4px rgba(252,209,22,0.12),0 6px 18px rgba(0,0,0,0.6) inset;border-color:var(--yellow)}
+.posts{display:flex;flex-direction:column;gap:12px}
+.card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.08));padding:14px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+/* vertical colored accent */
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,var(--red),var(--yellow),var(--green));}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 /* Instagram-like ring around avatar using conic-gradient + inner circle */
-.avatar{position:relative;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;padding:3px;font-weight:600;font-size:14px;color:var(--yellow)}
+.avatar{position:relative;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;padding:3px;font-weight:700;font-size:14px;color:var(--yellow)}
 .avatar::before{content:'';position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--red),var(--yellow),var(--green));z-index:0}
 .avatar > span{position:relative;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:var(--card);color:var(--text);font-weight:700}
-.avatar-text{position:relative;z-index:2}
-
-/* Fallback if HTML doesn't include a span inside .avatar: create inner circle */
-.avatar::after{content:'';position:absolute;left:6px;top:6px;right:6px;bottom:6px;border-radius:50%;background:var(--card);z-index:1}
-.card h3{margin:0;font-size:13px;color:var(--text)}
-.card-meta{font-size:11px;color:#888}
-.card p{margin:6px 0;font-size:13px;line-height:1.4}
-.card-actions{display:flex;gap:12px;margin-top:8px;padding-top:8px;border-top:1px solid #222}
-button{background:linear-gradient(135deg,var(--red),var(--yellow));border:0;padding:6px 12px;border-radius:16px;cursor:pointer;color:#fff;font-weight:600;font-size:12px;transition:all 0.2s ease;box-shadow:0 2px 6px rgba(206,17,38,0.3)}
-button:hover{transform:scale(1.05);box-shadow:0 4px 12px rgba(206,17,38,0.5)}
-.like-btn{background:rgba(206,17,38,0.2);color:var(--red);border:1px solid var(--red)}
+.avatar::after{content:'';position:absolute;left:7px;top:7px;right:7px;bottom:7px;border-radius:50%;background:var(--card);z-index:1}
+.card h3{margin:0;font-size:14px;color:var(--text)}
+.card-meta{font-size:12px;color:#bbb}
+.card p{margin:8px 0;font-size:14px;line-height:1.45;color:#e6e6e6}
+.card-actions{display:flex;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.03)}
+button{background:linear-gradient(135deg,var(--red),var(--yellow));border:0;padding:8px 14px;border-radius:20px;cursor:pointer;color:#111;font-weight:700;font-size:13px;transition:all 0.2s ease;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,0.6)}
+.like-btn{background:transparent;color:var(--red);border:1px solid rgba(206,17,38,0.2);padding:6px 12px}
 .like-btn.liked{background:var(--red);color:var(--yellow);border:1px solid var(--red)}
-.site-footer{padding:8px 0;border-top:3px solid var(--green);background:rgba(0,122,94,0.05);margin-top:16px;color:#999;font-size:11px;text-align:center}
+.site-footer{padding:10px 0;border-top:3px solid var(--green);background:rgba(0,122,94,0.03);margin-top:18px;color:#999;font-size:12px;text-align:center}
 
-/* Header border like Instagram (thin gradient outline) */
-.site-header{position:relative}
-.site-header::before{content:'';position:absolute;inset:-4px;z-index:-1;border-radius:8px;background:linear-gradient(90deg,var(--red),var(--yellow),var(--green));filter:blur(6px);opacity:0.9}
+/* focus and accessibility */
+button:focus, .post-form input:focus{outline:none}
+button:active{transform:translateY(-1px)}
 
-@media (max-width:480px){.site-header h1{font-size:18px};.container{padding:8px}}
+@media (max-width:480px){.site-header h1{font-size:18px};.container{padding:12px;max-width:92%}}
+
+/* avatar image styling */
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}

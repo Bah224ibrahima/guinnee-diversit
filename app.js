@@ -53,7 +53,9 @@ function renderPosts() {
     postEl.className = 'card';
     postEl.innerHTML = `
       <div class="card-header">
-        <div class="avatar" style="background:${post.color}">${post.avatar}</div>
+        <div class="avatar" style="background:${post.color}">
+          <span>${post.photo ? `<img src="${post.photo}" alt="${post.user}">` : post.avatar}</span>
+        </div>
         <div>
           <h3>${post.user}</h3>
           <div class="card-meta">${post.time}</div>
@@ -83,9 +85,14 @@ async function addPost(text) {
   if(!text.trim()) return alert('Veuillez écrire quelque chose à partager avec la communauté!');
   
   const user = getRandomUser();
+  const currentUser = (typeof auth !== 'undefined' && auth && auth.currentUser) ? auth.currentUser : null;
+  const displayName = currentUser && currentUser.displayName ? currentUser.displayName : user.name;
+  const avatarChar = displayName ? displayName[0] : user.name[0];
+  const photoUrl = currentUser && currentUser.photoURL ? currentUser.photoURL : null;
   const newPost = {
-    user: user.name,
-    avatar: user.name[0],
+    user: displayName,
+    avatar: avatarChar,
+    photo: photoUrl,
     color: user.color,
     text: text,
     time: 'À l\'instant',
@@ -99,6 +106,7 @@ async function addPost(text) {
       const docRef = await addDoc(collection(db, "posts"), {
         user: newPost.user,
         avatar: newPost.avatar,
+        photo: newPost.photo || null,
         color: newPost.color,
         text: newPost.text,
         likes: 0,
@@ -138,6 +146,7 @@ async function loadPostsFromFirebase() {
         id: doc.id,
         user: data.user,
         avatar: data.avatar,
+        photo: data.photo || null,
         color: data.color,
         text: data.text,
         time: '📱 Firebase',
