@@ -45,6 +45,32 @@ window.signOutUser = signOutUser;
 window.registerWithEmail = registerWithEmail;
 window.loginWithEmail = loginWithEmail;
 
+// --- LocalStorage Authentication ---
+function creerCompte() {
+    const nom = document.getElementById('username').value;
+    const mdp = document.getElementById('password').value;
+    const message = document.getElementById('auth-message');
+
+    if(nom === "" || mdp === "") {
+        message.innerText = "❌ Veuillez remplir tous les champs";
+        message.style.color = "red";
+    } else {
+        // Sauvegarde locale sur le téléphone
+        localStorage.setItem('user_nom', nom);
+        localStorage.setItem('user_mdp', mdp);
+        
+        message.innerText = "✅ Compte créé pour " + nom + " !";
+        message.style.color = "#009460";
+        
+        // Cache le formulaire après 2 secondes
+        setTimeout(() => {
+            document.getElementById('auth-section').innerHTML = "<h3>Bienvenue, " + nom + " ! 👋</h3>";
+        }, 2000);
+    }
+}
+
+window.creerCompte = creerCompte;
+
 function renderPosts() {
   const feed = document.getElementById('feed');
   feed.innerHTML = '';

@@ -40,6 +40,14 @@
             <button id="emailLogin">Se connecter</button>
         </section>
 
+        <div id="auth-section" class="auth-section">
+            <h3>Créer un compte 🇬🇳</h3>
+            <input type="text" id="username" placeholder="Nom d'utilisateur" class="auth-input">
+            <input type="password" id="password" placeholder="Mot de passe" class="auth-input">
+            <button onclick="creerCompte()" class="auth-btn">S'inscrire</button>
+            <p id="auth-message" class="auth-message"></p>
+        </div>
+
         <section class="post-form" id="postSection">
             <input type="text" id="postInput" placeholder="Partager quelque chose de divertissant..." />
             <button id="postBtn">Publier</button>
