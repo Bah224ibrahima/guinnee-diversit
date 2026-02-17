@@ -1,515 +1,165 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guinée Divertisity - Réseau Social</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <h1>Guinée Divertisity</h1>
-      <p class="subtitle">Réseau social communautaire — par Ibrahima Bah</p>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <h2 style="margin-top:0;margin-bottom:6px;font-size:16px;color:var(--yellow)">✨ Bienvenue sur Guinée Divertisity!</h2>
-      <p style="margin:0;font-size:13px;color:#bbb">Partagez vos moments, divertissez-vous et connectez-vous avec la communauté guinéenne.</p>
-    </section>
-
-        <!-- Authentication area -->
-        <section id="authArea" style="margin-bottom:12px;display:flex;gap:8px;align-items:center;justify-content:space-between;">
-            <div id="userInfo" style="display:flex;gap:8px;align-items:center">
-                <div id="avatarSmall" style="width:36px;height:36px;border-radius:50%;background:#333;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;display:none"></div>
-                <div id="welcomeText" style="font-size:13px;color:#ddd">Vous n'êtes pas connecté</div>
-            </div>
-            <div id="authButtons" style="display:flex;gap:8px">
-                <button id="googleSignIn">Se connecter avec Google</button>
-                <button id="showEmailForm">Connexion / Inscription</button>
-                <button id="signOutBtn" style="display:none">Se déconnecter</button>
-            </div>
-        </section>
-
-        <section id="emailAuth" style="display:none;margin-bottom:12px;gap:8px">
-            <input id="emailInput" type="email" placeholder="Email" style="padding:8px;border-radius:8px;border:1px solid #333;background:#111;color:#fff" />
-            <input id="passInput" type="password" placeholder="Mot de passe" style="padding:8px;border-radius:8px;border:1px solid #333;background:#111;color:#fff" />
-            <button id="emailRegister">S'inscrire</button>
-            <button id="emailLogin">Se connecter</button>
-        </section>
-
-        <section class="post-form" id="postSection">
-            <input type="text" id="postInput" placeholder="Partager quelque chose de divertissant..." />
-            <button id="postBtn">Publier</button>
-        </section>
-
-    <section id="feed" class="posts"></section>
-  </main>
-
-  <footer class="site-footer">
-    © 2026 Guinée Divertisity — Pour tous les Guinéens • Créé par Ibrahima Bah
-  </footer>
-
-  <!-- Firebase SDK -->
-  <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="app.js"></script>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Ibrahima Bah</title>
+    <title>Guinée Web</title>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #009E49, #FCD116, #CE1126);
         }
 
         header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-            padding: 40px 20px;
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
         }
 
-        header h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
         }
 
-        header p {
-            font-size: 18px;
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #009E49;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
             opacity: 0.9;
         }
 
-        .info-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .post {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
         }
 
-        .info-box h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 20px;
+        .post strong {
+            color: #009E49;
         }
 
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .contact-item {
+        .footer {
+            text-align: center;
             padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .contact-item strong {
-            display: block;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .contact-item a {
-            color: #764ba2;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-        }
-
-        .project-content {
-            padding: 25px;
-        }
-
-        .project-title {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .project-description {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            min-height: 60px;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .tech-tag {
-            display: inline-block;
-            background: #e8eaf6;
-            color: #667eea;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            text-decoration: none;
-            text-align: center;
-            transition: all 0.3s;
+            color: white;
             font-size: 14px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-
-        .btn-secondary:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-        }
-
-        .feature {
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            background: #f8f9fa;
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .feature-title {
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .feature-text {
-            font-size: 14px;
-            color: #666;
-        }
-
-        footer {
-            text-align: center;
-            color: white;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            margin-top: 50px;
-        }
-
-        footer p {
-            margin-bottom: 10px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .stat {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 32px;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 32px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
+
 <body>
+
+    <header>🇬🇳 Guinée Web</header>
+
     <div class="container">
-        <header>
-            <h1>🇬🇳 Ibrahima Bah</h1>
-            <p>Développeur Web & Créateur de Projets Culturels Guinéens</p>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Projets</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Passion</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Créativité</div>
-                </div>
-            </div>
-        </header>
 
-        <div class="info-box">
-            <h3>📞 Informations de Contact</h3>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <strong>📧 Email</strong>
-                    <a href="mailto:ibah90421@gmail.com">ibah90421@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <strong>📱 Téléphone</strong>
-                    <a href="tel:+224660634837">+224 660 634 837</a>
-                </div>
-                <div class="contact-item">
-                    <strong>📍 Localisation</strong>
-                    Guinée
-                </div>
-            </div>
+        <div class="card">
+            <h3>Créer un compte</h3>
+            <input type="text" id="username" placeholder="Ton nom">
+            <button onclick="saveUser()">S'enregistrer</button>
         </div>
 
-        <div class="info-box">
-            <h3>🎯 Domaines d'Expertise</h3>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">🌐</div>
-                    <div class="feature-title">Développement Web</div>
-                    <div class="feature-text">HTML, CSS, JavaScript</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🎨</div>
-                    <div class="feature-title">Design Responsive</div>
-                    <div class="feature-text">Mobile & Desktop</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🇬🇳</div>
-                    <div class="feature-title">Culture Guinéenne</div>
-                    <div class="feature-text">Projets Culturels</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📱</div>
-                    <div class="feature-title">Applications Web</div>
-                    <div class="feature-text">Réseaux Sociaux</div>
-                </div>
-            </div>
+        <div class="card">
+            <h3>Publier un message</h3>
+            <textarea id="postText" placeholder="Quoi de neuf en Guinée ?"></textarea>
+            <button onclick="addPost()">Publier</button>
         </div>
 
-        <h2 style="color: white; margin-bottom: 30px; text-align: center; font-size: 36px;">📂 Mes Projets</h2>
-
-        <div class="projects-grid">
-            <!-- Projet 1: Guinea Diversity Social -->
-            <div class="project-card">
-                <div class="project-image">🇬🇳</div>
-                <div class="project-content">
-                    <div class="project-title">Guinea Diversity Social</div>
-                    <div class="project-description">
-                        Réseau social culturel dédié à la promotion de la culture guinéenne. Partagez, explorez et célébrez les traditions, musiques et cuisines authentiques.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="../guinea_diversity_social.html" class="btn btn-primary">Ouvrir l'App</a>
-                        <a href="#" class="btn btn-secondary">Code</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projet 2: Guinea Diversity (Version Originale) -->
-            <div class="project-card">
-                <div class="project-image">🎭</div>
-                <div class="project-content">
-                    <div class="project-title">Guinea Diversity Platform</div>
-                    <div class="project-description">
-                        Plateforme de divertissement avec moteur de recherche intégré. Découvrez le contenu culturel traditionnel guinéen enrichi de ressources multimedia.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="../guinea_diversity.html" class="btn btn-primary">Ouvrir l'App</a>
-                        <a href="#" class="btn btn-secondary">Code</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projet 3: Fashion Boutique -->
-            <div class="project-card">
-                <div class="project-image">👗</div>
-                <div class="project-content">
-                    <div class="project-title">Bah Fashion Boutique</div>
-                    <div class="project-description">
-                        Plateforme e-commerce de mode guinéenne. Présentant les créations de fashions traditionnelles et contemporaines, avec système de panier et paiement.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="../bah_fashion_index.html" class="btn btn-primary">Ouvrir l'App</a>
-                        <a href="#" class="btn btn-secondary">Code</a>
-                    </div>
-                </div>
-            </div>
+        <div class="card">
+            <h3>Fil d'actualité</h3>
+            <div id="feed"></div>
         </div>
 
-        <div class="info-box" style="margin-bottom: 0;">
-            <h3>✨ Caractéristiques des Projets</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
-                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 8px;">🎯 Réseaux Sociaux</strong>
-                    <p style="font-size: 14px; color: #666;">Système complet d'interactions sociales avec posts, commentaires, likes et partages</p>
-                </div>
-                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 8px;">🔍 Recherche Avancée</strong>
-                    <p style="font-size: 14px; color: #666;">Moteur de recherche puissant avec filtres multiples et suggestions intelligentes</p>
-                </div>
-                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 8px;">📱 Design Responsive</strong>
-                    <p style="font-size: 14px; color: #666;">Optimisé pour tous les appareils: mobile, tablette et ordinateur</p>
-                </div>
-                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 8px;">🇬🇳 Contenu Culturel</strong>
-                    <p style="font-size: 14px; color: #666;">Riche contenu culturel guinéen: musiques, danses, cuisine et traditions</p>
-                </div>
-                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 8px;">⚡ Performance</strong>
-                    <p style="font-size: 14px; color: #666;">Chargement rapide et interface fluide pour la meilleure expérience utilisateur</p>
-                </div>
-                <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #667eea;">
-                    <strong style="color: #667eea; display: block; margin-bottom: 8px;">🎨 Design Moderne</strong>
-                    <p style="font-size: 14px; color: #666;">Interface moderne avec dégradés attrayants et animations fluides</p>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <h3 style="margin-bottom: 15px;">🚀 Prêt à Collaborer?</h3>
-            <p>Intéressé par mon travail? Contactez-moi pour des projets, collaborations ou questions!</p>
-            <div style="margin: 20px 0; font-size: 20px;">
-                📧 <a href="mailto:ibah90421@gmail.com" style="color: white; text-decoration: none; font-weight: bold;">ibah90421@gmail.com</a>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                📱 <strong style="color: #ffd700;">+224 660 634 837</strong>
-            </div>
-            <p style="margin-top: 20px; opacity: 0.8;">&copy; 2026 Ibrahima Bah - Portfolio. Tous droits réservés. 🇬🇳</p>
-        </footer>
     </div>
+
+    <div class="footer">
+        Guinée Web © 2026 - Réseau social guinéen
+    </div>
+
+    <script>
+        let currentUser = localStorage.getItem("guineeUser");
+
+        function saveUser() {
+            const name = document.getElementById("username").value;
+            if (!name) {
+                alert("Entre ton nom !");
+                return;
+            }
+            localStorage.setItem("guineeUser", name);
+            currentUser = name;
+            alert("Compte enregistré !");
+        }
+
+        function addPost() {
+            const text = document.getElementById("postText").value;
+            if (!text || !currentUser) {
+                alert("Tu dois créer un compte et écrire un message !");
+                return;
+            }
+
+            const post = {
+                user: currentUser,
+                content: text,
+                date: new Date().toLocaleString()
+            };
+
+            let posts = JSON.parse(localStorage.getItem("guineePosts")) || [];
+            posts.unshift(post);
+            localStorage.setItem("guineePosts", JSON.stringify(posts));
+
+            document.getElementById("postText").value = "";
+            displayPosts();
+        }
+
+        function displayPosts() {
+            const feed = document.getElementById("feed");
+            feed.innerHTML = "";
+
+            let posts = JSON.parse(localStorage.getItem("guineePosts")) || [];
+
+            posts.forEach(p => {
+                const div = document.createElement("div");
+                div.className = "post";
+                div.innerHTML = "<strong>" + p.user + "</strong><br>" +
+                    p.content + "<br><small>" + p.date + "</small>";
+                feed.appendChild(div);
+            });
+        }
+
+        displayPosts();
+    </script>
+
 </body>
+
 </html>
